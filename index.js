@@ -3,11 +3,13 @@
  */
 
 import {AppRegistry} from 'react-native';
-import App from './App';
+// import App from './App';
+import App from './AppJs';
 import {name as appName} from './app.json';
 import RNAndroidNotificationListener, { RNAndroidNotificationListenerHeadlessJsName } from 'react-native-android-notification-listener';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PushNotification from "react-native-push-notification";
+import NotificationHandler from './NotificationHandler';
 
 const headlessNotificationListener = async ({ notification }) => {
     /**
@@ -52,7 +54,8 @@ const headlessNotificationListener = async ({ notification }) => {
 //     /* Android Only Properties */
 //     repeatTime: 1, // (optional) Increment of configured repeatType. Check 'Repeating Notifications' section for more info.
 //   });
+// NotificationHandler.attachRegister(onRegister);
+// NotificationHandler.attachNotification(onNotification);
 
-
-AppRegistry.registerHeadlessTask(RNAndroidNotificationListenerHeadlessJsName,	() => headlessNotificationListener)
+// AppRegistry.registerHeadlessTask(RNAndroidNotificationListenerHeadlessJsName,	() => headlessNotificationListener)
 AppRegistry.registerComponent(appName, () => App);

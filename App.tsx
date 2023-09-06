@@ -19,6 +19,7 @@ import {
   Image,
   TouchableOpacity,
   AppState,
+  Alert,
   FlatList
 } from 'react-native';
 import PushNotification from "react-native-push-notification";
@@ -319,6 +320,10 @@ function App(): JSX.Element {
                     onPress={handleOnPressPermissionButton}
                     disabled={hasPermission}
                 />
+                <Button 
+                title='Local Notification (now)'
+                onPress={() => Alert.alert('Simple Button pressed')}
+                />
             </View>
             <View></View>
             <View style={styles.notificationsWrapper}>
@@ -348,12 +353,14 @@ function App(): JSX.Element {
                     keyExtractor={item => item.id}
                 />
             </SafeAreaView>
-            <TouchableOpacity
+        {/* <Button
+          title="Local Notification (now)"
+
           onPress={() => {
+            console.log('on press');
+            
             localNotif();
-          }}>
-          <Text>Local Notification (now)</Text>
-        </TouchableOpacity>
+          }}/> */}
         </SafeAreaView>
   );
 }
