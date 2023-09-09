@@ -10,6 +10,7 @@ import RNAndroidNotificationListener, { RNAndroidNotificationListenerHeadlessJsN
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PushNotification from "react-native-push-notification";
 import NotificationHandler from './NotificationHandler';
+import {BlockingQueueWithAsyncStorage} from './config/AsynStorage';
 
 const headlessNotificationListener = async ({ notification }) => {
     /**
@@ -33,12 +34,9 @@ const headlessNotificationListener = async ({ notification }) => {
      *      ]
      *  }
      */
-
+     blockingQueueStorage = new BlockingQueueWithAsyncStorage("payment-"); 
     if (notification) {
-        /**
-         * Here you could store the notifications in a external API.
-         * I'm using AsyncStorage here as an example.
-         */
+         blockingQueueStorage.saveItemToStorage(notification);
      
         // console.log("notification", notification);
         // await AsyncStorage.setItem('@lastNotification', notification);
@@ -57,5 +55,5 @@ const headlessNotificationListener = async ({ notification }) => {
 // NotificationHandler.attachRegister(onRegister);
 // NotificationHandler.attachNotification(onNotification);
 
-// AppRegistry.registerHeadlessTask(RNAndroidNotificationListenerHeadlessJsName,	() => headlessNotificationListener)
+AppRegistry.registerHeadlessTask(RNAndroidNotificationListenerHeadlessJsName,	() => headlessNotificationListener)
 AppRegistry.registerComponent(appName, () => App);
